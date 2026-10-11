@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Via Wash Cloud Security Architecture — a practical Microsoft Entra ID and cloud security engineering case study for a scalable, multi-location business.">
+    <meta name="description" content="Via Wash Cloud Security Architecture — a practical Microsoft Entra ID and cloud security engineering case study.">
 
     <title>Via Wash | Cloud Security Architecture</title>
 
     <style>
         :root {
-            --background: #07111f;
-            --surface: #0d1b2c;
-            --surface-light: #12243a;
-            --text: #edf5fc;
-            --muted: #9eb0c5;
-            --accent: #43e0c0;
-            --border: #20344b;
-            --blue: #8abaff;
+            --background: #080812;
+            --surface: #10101d;
+            --surface-light: #171728;
+            --text: #f4f2fa;
+            --muted: #aaa6bb;
+            --purple: #9b6cff;
+            --purple-light: #b99aff;
+            --border: #28263b;
         }
 
         * {
@@ -50,7 +50,7 @@
 
         header {
             border-bottom: 1px solid var(--border);
-            background: rgba(7, 17, 31, 0.94);
+            background: rgba(8, 8, 18, 0.94);
         }
 
         nav {
@@ -68,64 +68,77 @@
         }
 
         .brand span {
-            color: var(--accent);
+            color: var(--purple);
         }
 
         .nav-links {
             display: flex;
-            gap: 24px;
+            gap: 26px;
             flex-wrap: wrap;
             font-size: 0.9rem;
             color: var(--muted);
         }
 
         .nav-links a:hover {
-            color: var(--accent);
+            color: var(--purple-light);
         }
 
         .hero {
-            padding: 110px 0 90px;
+            padding: 120px 0 105px;
             background:
                 radial-gradient(
-                    ellipse at 85% 15%,
-                    rgba(67, 224, 192, 0.10),
-                    transparent 40%
+                    ellipse at 85% 10%,
+                    rgba(155, 108, 255, 0.14),
+                    transparent 42%
+                ),
+                radial-gradient(
+                    ellipse at 10% 80%,
+                    rgba(108, 76, 180, 0.07),
+                    transparent 38%
                 );
         }
 
         .eyebrow {
             display: inline-block;
-            color: var(--accent);
+            color: var(--purple-light);
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             font-weight: 700;
             margin-bottom: 24px;
         }
 
         h1 {
-            font-size: clamp(2.8rem, 7vw, 5.2rem);
+            font-size: clamp(2.7rem, 6vw, 4.8rem);
             line-height: 1.08;
-            letter-spacing: -3px;
-            max-width: 850px;
+            letter-spacing: -2.8px;
+            max-width: 900px;
             margin-bottom: 28px;
         }
 
         h1 span {
-            color: var(--accent);
+            color: var(--purple);
         }
 
         .hero p {
             color: var(--muted);
-            font-size: 1.12rem;
-            max-width: 720px;
+            font-size: 1.08rem;
+            max-width: 730px;
+        }
+
+        .technical-line {
+            margin-top: 20px;
+            color: var(--purple-light);
+            font-size: 0.84rem;
+            letter-spacing: 1.2px;
+            font-weight: 700;
         }
 
         .hero-actions {
             display: flex;
             flex-wrap: wrap;
             gap: 14px;
-            margin-top: 34px;
+            margin-top: 36px;
         }
 
         .button {
@@ -135,12 +148,13 @@
             font-weight: 700;
             font-size: 0.9rem;
             border: 1px solid var(--border);
+            transition: 0.2s ease;
         }
 
         .button-primary {
-            background: var(--accent);
-            color: #06151b;
-            border-color: var(--accent);
+            background: var(--purple);
+            color: #100b19;
+            border-color: var(--purple);
         }
 
         .button-secondary {
@@ -173,23 +187,23 @@
 
         .status-item strong {
             display: block;
-            font-size: 1rem;
+            font-size: 0.98rem;
             margin-bottom: 5px;
         }
 
         .status-item span {
-            font-size: 0.85rem;
+            font-size: 0.84rem;
             color: var(--muted);
         }
 
         section {
-            padding: 82px 0;
+            padding: 84px 0;
             scroll-margin-top: 30px;
         }
 
         .section-heading {
-            max-width: 720px;
-            margin-bottom: 38px;
+            max-width: 740px;
+            margin-bottom: 40px;
         }
 
         .section-heading h2 {
@@ -213,12 +227,12 @@
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 26px;
+            padding: 27px;
         }
 
         .card-label {
-            color: var(--accent);
-            font-size: 0.75rem;
+            color: var(--purple-light);
+            font-size: 0.73rem;
             text-transform: uppercase;
             letter-spacing: 1.4px;
             font-weight: 700;
@@ -231,7 +245,7 @@
 
         .card p {
             color: var(--muted);
-            font-size: 0.94rem;
+            font-size: 0.93rem;
         }
 
         .architecture {
@@ -250,13 +264,14 @@
             background: var(--surface-light);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 19px;
+            padding: 20px;
             margin: 0 auto;
             max-width: 540px;
         }
 
         .architecture-node.primary {
-            border-color: var(--accent);
+            border-color: rgba(155, 108, 255, 0.7);
+            box-shadow: 0 0 30px rgba(155, 108, 255, 0.06);
         }
 
         .architecture-node strong {
@@ -273,7 +288,7 @@
         .connector {
             width: 1px;
             height: 30px;
-            background: var(--accent);
+            background: var(--purple);
             margin: auto;
         }
 
@@ -306,8 +321,8 @@
         }
 
         .principle {
-            padding: 22px;
-            border-left: 3px solid var(--accent);
+            padding: 23px;
+            border-left: 3px solid var(--purple);
             background: var(--surface);
         }
 
@@ -317,7 +332,7 @@
 
         .principle p {
             color: var(--muted);
-            font-size: 0.94rem;
+            font-size: 0.93rem;
         }
 
         .roadmap {
@@ -336,10 +351,11 @@
             position: absolute;
             left: -34px;
             top: 8px;
-            width: 11px;
-            height: 11px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: var(--accent);
+            background: var(--purple);
+            box-shadow: 0 0 14px rgba(155, 108, 255, 0.45);
         }
 
         .roadmap-item h3 {
@@ -349,24 +365,24 @@
 
         .roadmap-item p {
             color: var(--muted);
-            font-size: 0.94rem;
+            font-size: 0.93rem;
         }
 
         .badge {
             display: inline-block;
-            border: 1px solid var(--border);
+            border: 1px solid rgba(155, 108, 255, 0.45);
             border-radius: 20px;
             padding: 3px 9px;
             margin-left: 8px;
-            font-size: 0.7rem;
-            color: var(--accent);
+            font-size: 0.68rem;
+            color: var(--purple-light);
             vertical-align: middle;
         }
 
         .callout {
             background: var(--surface-light);
             border: 1px solid var(--border);
-            padding: 28px;
+            padding: 30px;
             border-radius: 12px;
         }
 
@@ -379,7 +395,7 @@
             border-top: 1px solid var(--border);
             padding: 30px 0;
             color: var(--muted);
-            font-size: 0.85rem;
+            font-size: 0.84rem;
         }
 
         .footer-content {
@@ -390,6 +406,7 @@
         }
 
         @media (max-width: 760px) {
+
             .nav-links {
                 gap: 12px;
             }
@@ -401,7 +418,7 @@
             }
 
             .hero {
-                padding: 75px 0 65px;
+                padding: 80px 0 70px;
             }
 
             h1 {
@@ -428,7 +445,7 @@
             }
 
             section {
-                padding: 60px 0;
+                padding: 62px 0;
             }
         }
     </style>
@@ -439,7 +456,10 @@
 <header>
     <div class="container">
         <nav aria-label="Main navigation">
-            <a class="brand" href="#home">VIA <span>WASH</span></a>
+
+            <a class="brand" href="#home">
+                VIA <span>WASH</span>
+            </a>
 
             <div class="nav-links">
                 <a href="#project">Project</a>
@@ -447,6 +467,7 @@
                 <a href="#security">Security</a>
                 <a href="#roadmap">Roadmap</a>
             </div>
+
         </nav>
     </div>
 </header>
@@ -455,22 +476,29 @@
 
     <section class="hero" id="home">
         <div class="container">
-            <span class="eyebrow">Cloud Security Engineering · Case Study</span>
+
+            <span class="eyebrow">
+                Cloud Security Engineering · Case Study
+            </span>
 
             <h1>
-                Securing identity.<br>
-                Enabling <span>scale.</span>
+                Building the security foundation for <span>Via Wash.</span>
             </h1>
 
             <p>
-                Designing a secure, scalable identity and access architecture
-                for Via Wash, a conceptual multi-location laundry and
-                dry-cleaning organisation. The project uses Microsoft Entra ID
-                to explore how business requirements become security controls
-                that can be implemented and tested.
+                A practical identity and cloud security architecture for
+                a scalable, multi-location laundry and dry-cleaning
+                organisation. Business requirements are translated into
+                security controls, implemented in Microsoft cloud services,
+                and tested against defined security outcomes.
             </p>
 
+            <div class="technical-line">
+                MICROSOFT ENTRA ID · IDENTITY & ACCESS · CLOUD SECURITY
+            </div>
+
             <div class="hero-actions">
+
                 <a class="button button-primary" href="#architecture">
                     Explore the architecture
                 </a>
@@ -479,274 +507,473 @@
                    href="https://github.com/Kaeturah/via-wash-cloud-security">
                     View source repository ↗
                 </a>
+
             </div>
+
         </div>
     </section>
 
+
     <div class="status-strip">
+
         <div class="container status-grid">
+
             <div class="status-item">
                 <strong>Microsoft Entra ID</strong>
-                <span>Identity and access management platform</span>
+                <span>Identity and access management</span>
             </div>
 
             <div class="status-item">
                 <strong>Project status: In progress</strong>
-                <span>Design and initial identity foundation</span>
+                <span>Identity foundation currently being developed</span>
             </div>
 
             <div class="status-item">
                 <strong>Designed for growth</strong>
-                <span>Multi-location business scenario</span>
+                <span>Multi-location business architecture</span>
             </div>
+
         </div>
+
     </div>
 
-    <section id="project">
-        <div class="container">
-            <div class="section-heading">
-                <span class="eyebrow">01 / Business context</span>
 
-                <h2>A business scenario with real security challenges.</h2>
+    <section id="project">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <span class="eyebrow">
+                    01 / Business context
+                </span>
+
+                <h2>
+                    A business scenario with real security challenges.
+                </h2>
 
                 <p>
-                    Via Wash is modelled as a growing laundry and dry-cleaning
-                    organisation, beginning with London locations and designed
-                    to explore the security considerations of expansion across
-                    the UK and potentially internationally.
+                    Via Wash is modelled as a growing laundry and
+                    dry-cleaning organisation. The architecture begins
+                    with London and is designed to support expansion
+                    across the UK and potentially internationally.
                 </p>
+
             </div>
+
 
             <div class="grid">
-                <article class="card">
-                    <span class="card-label">The challenge</span>
-                    <h3>Growing complexity</h3>
-                    <p>
-                        More locations mean more employees, managers,
-                        contractors, applications and access decisions.
-                        Inconsistent permissions can introduce security risk.
-                    </p>
-                </article>
 
                 <article class="card">
-                    <span class="card-label">The requirement</span>
-                    <h3>Controlled access</h3>
+
+                    <span class="card-label">
+                        The challenge
+                    </span>
+
+                    <h3>
+                        Growing complexity
+                    </h3>
+
+                    <p>
+                        Expansion introduces more employees, locations,
+                        contractors, applications and access decisions.
+                        Poorly managed permissions can increase security risk.
+                    </p>
+
+                </article>
+
+
+                <article class="card">
+
+                    <span class="card-label">
+                        The requirement
+                    </span>
+
+                    <h3>
+                        Controlled access
+                    </h3>
+
                     <p>
                         Employees should receive access according to their
-                        responsibilities. A job title alone should not grant
-                        unrestricted access to company resources.
+                        responsibilities. A job title should never provide
+                        unrestricted access by default.
                     </p>
+
                 </article>
+
 
                 <article class="card">
-                    <span class="card-label">The objective</span>
-                    <h3>Secure scalability</h3>
+
+                    <span class="card-label">
+                        The objective
+                    </span>
+
+                    <h3>
+                        Secure scalability
+                    </h3>
+
                     <p>
-                        Develop an identity architecture that can accommodate
-                        new locations and business functions without relying
-                        on excessive or inconsistent permissions.
+                        Develop an identity architecture that can support
+                        new locations and business functions without
+                        continuously redesigning the security model.
                     </p>
+
                 </article>
+
             </div>
+
         </div>
+
     </section>
 
-    <section class="architecture" id="architecture">
-        <div class="container">
-            <div class="section-heading">
-                <span class="eyebrow">02 / Identity architecture</span>
 
-                <h2>Start with identities and responsibilities.</h2>
+    <section class="architecture" id="architecture">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <span class="eyebrow">
+                    02 / Identity architecture
+                </span>
+
+                <h2>
+                    Start with identities and responsibilities.
+                </h2>
 
                 <p>
                     The initial design separates operational roles into
-                    security groups. These groups provide an organisational
-                    foundation; they do not automatically grant access to
+                    security groups. These groups establish the identity
+                    structure but do not automatically grant access to
                     applications or resources.
                 </p>
+
             </div>
+
 
             <div class="architecture-box">
 
                 <div class="architecture-node primary">
-                    <strong>Via Wash</strong>
-                    <small>Business and security requirements</small>
+
+                    <strong>
+                        Via Wash
+                    </strong>
+
+                    <small>
+                        Business and security requirements
+                    </small>
+
                 </div>
 
+
                 <div class="connector"></div>
+
 
                 <div class="architecture-node primary">
-                    <strong>Microsoft Entra ID</strong>
-                    <small>Identity and access management</small>
+
+                    <strong>
+                        Microsoft Entra ID
+                    </strong>
+
+                    <small>
+                        Identity and access management
+                    </small>
+
                 </div>
+
 
                 <div class="connector"></div>
 
+
                 <div class="role-grid">
-                    <div class="role">
-                        <strong>Managers</strong>
-                        <small>Operational management</small>
-                    </div>
 
                     <div class="role">
-                        <strong>Store Staff</strong>
-                        <small>Store operations</small>
+
+                        <strong>
+                            Managers
+                        </strong>
+
+                        <small>
+                            Operational management
+                        </small>
+
                     </div>
 
+
                     <div class="role">
-                        <strong>Delivery Team</strong>
-                        <small>Collection and delivery</small>
+
+                        <strong>
+                            Store Staff
+                        </strong>
+
+                        <small>
+                            Store operations
+                        </small>
+
                     </div>
+
+
+                    <div class="role">
+
+                        <strong>
+                            Delivery Team
+                        </strong>
+
+                        <small>
+                            Collection and delivery
+                        </small>
+
+                    </div>
+
                 </div>
+
             </div>
+
         </div>
+
     </section>
 
-    <section id="security">
-        <div class="container">
-            <div class="section-heading">
-                <span class="eyebrow">03 / Security principles</span>
 
-                <h2>Security decisions driven by business needs.</h2>
+    <section id="security">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <span class="eyebrow">
+                    03 / Security principles
+                </span>
+
+                <h2>
+                    Security decisions driven by business needs.
+                </h2>
 
                 <p>
                     The architecture is being developed around the risks
                     Via Wash would face as its workforce, locations and
                     technology environment grow.
                 </p>
+
             </div>
+
 
             <div class="principles">
-                <article class="principle">
-                    <h3>Least privilege</h3>
-                    <p>
-                        Give each identity only the permissions required for
-                        its responsibilities. Avoid unnecessary administrative
-                        privileges.
-                    </p>
-                </article>
 
                 <article class="principle">
-                    <h3>Identity lifecycle</h3>
+
+                    <h3>
+                        Least privilege
+                    </h3>
+
                     <p>
-                        Consider how identities are created, changed, reviewed
-                        and disabled when employees or contractors no longer
-                        require access.
+                        Give each identity only the permissions required
+                        for its responsibilities. Avoid unnecessary
+                        administrative privileges.
                     </p>
+
                 </article>
 
-                <article class="principle">
-                    <h3>Separation of duties</h3>
-                    <p>
-                        Separate operational responsibilities from sensitive
-                        functions such as payroll, finance and security
-                        administration.
-                    </p>
-                </article>
 
                 <article class="principle">
-                    <h3>Defence in depth</h3>
+
+                    <h3>
+                        Identity lifecycle
+                    </h3>
+
                     <p>
-                        Build toward layered controls, including strong
-                        authentication, access policies, privileged access
-                        management and monitoring.
+                        Consider how identities are created, changed,
+                        reviewed and disabled when access is no longer
+                        required.
                     </p>
+
                 </article>
+
+
+                <article class="principle">
+
+                    <h3>
+                        Separation of duties
+                    </h3>
+
+                    <p>
+                        Separate operational responsibilities from
+                        sensitive functions such as payroll, finance
+                        and security administration.
+                    </p>
+
+                </article>
+
+
+                <article class="principle">
+
+                    <h3>
+                        Defence in depth
+                    </h3>
+
+                    <p>
+                        Build toward layered controls including strong
+                        authentication, access policies, privileged
+                        access management and monitoring.
+                    </p>
+
+                </article>
+
             </div>
+
         </div>
+
     </section>
 
-    <section id="roadmap">
-        <div class="container">
-            <div class="section-heading">
-                <span class="eyebrow">04 / Implementation roadmap</span>
 
-                <h2>From business requirement to tested control.</h2>
+    <section id="roadmap">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <span class="eyebrow">
+                    04 / Implementation roadmap
+                </span>
+
+                <h2>
+                    From business requirement to tested control.
+                </h2>
 
                 <p>
-                    The project follows a scenario-driven engineering process.
-                    Each capability will be introduced when it solves a
-                    meaningful business or security requirement.
+                    Capabilities are introduced when they solve a meaningful
+                    business or security requirement rather than simply
+                    because a feature exists.
                 </p>
+
             </div>
+
 
             <div class="roadmap">
 
                 <div class="roadmap-item">
+
                     <h3>
                         Identity foundation
-                        <span class="badge">In progress</span>
+                        <span class="badge">
+                            In progress
+                        </span>
                     </h3>
+
                     <p>
-                        Establish the initial operational groups and define
-                        the intended identity and access model.
+                        Establish operational groups and define the initial
+                        identity and access model.
                     </p>
+
                 </div>
 
-                <div class="roadmap-item">
-                    <h3>User security and authentication</h3>
-                    <p>
-                        Develop secure user provisioning and explore
-                        authentication controls appropriate for employees
-                        and external collaborators.
-                    </p>
-                </div>
 
                 <div class="roadmap-item">
-                    <h3>Access control and privileged access</h3>
+
+                    <h3>
+                        User security and authentication
+                    </h3>
+
+                    <p>
+                        Develop secure user provisioning and authentication
+                        controls for employees and external collaborators.
+                    </p>
+
+                </div>
+
+
+                <div class="roadmap-item">
+
+                    <h3>
+                        Access control and privileged access
+                    </h3>
+
                     <p>
                         Design role-based permissions, apply least privilege
-                        and investigate appropriate controls for administrative
-                        identities.
+                        and control administrative identities.
                     </p>
+
                 </div>
 
+
                 <div class="roadmap-item">
-                    <h3>Conditional Access and identity protection</h3>
+
+                    <h3>
+                        Conditional Access and identity protection
+                    </h3>
+
                     <p>
                         Explore how access decisions can respond to identity
-                        risk, authentication requirements and other relevant
-                        security conditions.
+                        risk and other relevant security conditions.
                     </p>
+
                 </div>
+
 
                 <div class="roadmap-item">
-                    <h3>Governance, monitoring and testing</h3>
+
+                    <h3>
+                        Governance, monitoring and testing
+                    </h3>
+
                     <p>
-                        Develop access review and lifecycle processes, examine
-                        available security logs, and test implemented controls
-                        against defined expected outcomes.
+                        Develop lifecycle and access-review processes,
+                        examine security logs and test implemented controls.
                     </p>
+
                 </div>
+
             </div>
+
         </div>
+
     </section>
 
-    <section>
-        <div class="container">
-            <div class="callout">
-                <span class="eyebrow">Engineering approach</span>
 
-                <h2>Design. Implement. Validate.</h2>
+    <section>
+
+        <div class="container">
+
+            <div class="callout">
+
+                <span class="eyebrow">
+                    Engineering approach
+                </span>
+
+                <h2>
+                    Design. Implement. Validate.
+                </h2>
 
                 <p>
                     This is an evolving technical case study. Security
-                    capabilities will be described as implemented only after
-                    configuration and testing provide evidence of their
-                    behaviour. Future design goals are not presented as
-                    completed security controls.
+                    capabilities will be described as implemented only
+                    after configuration and testing provide evidence of
+                    their behaviour. Future design goals are not presented
+                    as completed controls.
                 </p>
+
             </div>
+
         </div>
+
     </section>
 
 </main>
 
+
 <footer>
+
     <div class="container footer-content">
-        <span>Via Wash · Cloud Security Architecture</span>
-        <span>Microsoft Entra ID · Project in progress</span>
+
+        <span>
+            Via Wash · Cloud Security Architecture
+        </span>
+
+        <span>
+            Microsoft Entra ID · Project in progress
+        </span>
+
     </div>
+
 </footer>
 
 </body>
